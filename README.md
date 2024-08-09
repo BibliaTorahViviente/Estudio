@@ -15,4 +15,4 @@ Para instalar y configurar el proyecto en tu entorno local, sigue estos pasos:
 
 1. **Clona el Repositorio**:
    ```bash
-   git clone https://github.com/tu-usuario/biblia-torah-viviente.git
+   https://bibliatorahviviente.github.io/Estudio/
