@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat de Estudio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            line-height: 1.6;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px 0;
+        }
+        .navbar a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+        .navbar a:hover {
+            background-color: #575757;
+        }
+        .chat-container, .container {
+            max-width: 800px;
+            margin: 20px auto;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .chat-container {
+            height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            background-color: #4a4a4a;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+        .chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+        .user-message {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        .ai-message {
+            background-color: #f1f0f0;
+            color: black;
+        }
+        .input-area {
+            display: flex;
+            padding: 20px;
+            border-top: 1px solid #ccc;
+        }
+        #user-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        #send-button {
+            padding: 10px 20px;
+            background-color: #4a4a4a;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        h1 {
+            text-align: center;
+            color: #4a4a4a;
+            padding: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #e7e7f3;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button {
+            background-color: #4a4a4a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #333;
+        }
+        .link-container {
+            margin-top: 10px;
+        }
+        .link-container a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="https://t.me/menutoraviviente" target="_blank">Menu</a>
+        <a href="https://t.me/bibliatoraviviente" target="_blank">En Vivo</a>
+        <a href="https://bibliatorahviviente.github.io/salmos/" target="_blank">Salmos</a>
+        <a href="https://t.me/toraviviente" target="_blank">Torah</a>
+        <a href="https://t.me/audiotecatoraviviente" target="_blank">Yeshivah</a>
+    </div>
+
+    <div class="chat-container">
+        <div class="chat-header">Chat de Estudio Ministerio Judío Mesiánico</div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Bienvenido a Biblia Torah Viviente de Estudio">
+            <button id="send-button">Enviar</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>COPIE Y PEGUE LAS PREGUNTAS EN EL CHAT DE BIBLIA TORAH VIVIENTE DE ESTUDIO</h1>
+        <ul>
+            <li>1. ¿Quién es Yeshúa HaMashíaj y cuál es su papel en la historia de la redención?
+                <button onclick="copyToClipboard('¿Quién es Yeshúa HaMashíaj y cuál es su papel en la historia de la redención?')">Copiar</button>
+            </li>
+            <li>2. ¿Cómo se aborda la Toráh desde una perspectiva mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se aborda la Toráh desde una perspectiva mesiánica?')">Copiar</button>
+            </li>
+            <li>3. ¿Cuáles son las diferencias clave entre la interpretación mesiánica y la rabínica tradicional de la Toráh?
+                <button onclick="copyToClipboard('¿Cuáles son las diferencias clave entre la interpretación mesiánica y la rabínica tradicional de la Toráh?')">Copiar</button>
+            </li>
+            <li>4. ¿Cómo se interpreta la figura de Melquisedec en el contexto de la fe mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se interpreta la figura de Melquisedec en el contexto de la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>5. ¿Qué es el pacto Davídico y cómo se relaciona con Yeshúa?
+                <button onclick="copyToClipboard('¿Qué es el pacto Davídico y cómo se relaciona con Yeshúa?')">Copiar</button>
+            </li>
+            <li>6. ¿Qué enseñan los profetas mayores sobre la venida del Mesías?
+                <button onclick="copyToClipboard('¿Qué enseñan los profetas mayores sobre la venida del Mesías?')">Copiar</button>
+            </li>
+            <li>7. ¿Cómo se entiende la profecía de Daniel 9 en relación con Yeshúa?
+                <button onclick="copyToClipboard('¿Cómo se entiende la profecía de Daniel 9 en relación con Yeshúa?')">Copiar</button>
+            </li>
+            <li>8. ¿Qué papel tiene el Brit Hadasháh en la restauración de Israel?
+                <button onclick="copyToClipboard('¿Qué papel tiene el Brit Hadasháh en la restauración de Israel?')">Copiar</button>
+            </li>
+            <li>9. ¿Cómo responde la fe mesiánica a la teología del reemplazo?
+                <button onclick="copyToClipboard('¿Cómo responde la fe mesiánica a la teología del reemplazo?')">Copiar</button>
+            </li>
+            <li>10. ¿Cuál es la relevancia de los Rollos del Mar Muerto para el judaísmo mesiánico?
+                <button onclick="copyToClipboard('¿Cuál es la relevancia de los Rollos del Mar Muerto para el judaísmo mesiánico?')">Copiar</button>
+            </li>
+            <li>11. ¿Cómo se interpretan las fiestas bíblicas desde una perspectiva mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se interpretan las fiestas bíblicas desde una perspectiva mesiánica?')">Copiar</button>
+            </li>
+            <li>12. Cómo se cumplen las profecías mesiánicas del Tanaj en Yeshúa?
+                <button onclick="copyToClipboard('Cómo se cumplen las profecías mesiánicas del Tanaj en Yeshúa?')">Copiar</button>
+            </li>
+            <li>13. ¿Cuál es el significado del término "Ben Adan" en el contexto de Yeshúa?
+                <button onclick="copyToClipboard('¿Cuál es el significado del término "Ben Adan" en el contexto de Yeshúa?')">Copiar</button>
+            </li>
+            <li>14. ¿Cómo se interpreta Isaías 53 en el judaísmo mesiánico?
+                <button onclick="copyToClipboard('¿Cómo se interpreta Isaías 53 en el judaísmo mesiánico?')">Copiar</button>
+            </li>
+            <li>15. ¿Cuál es el papel del Ruaj HaKodesh en la vida de un creyente mesiánico?
+                <button onclick="copyToClipboard('¿Cuál es el papel del Ruaj HaKodesh en la vida de un creyente mesiánico?')">Copiar</button>
+            </li>
+            <li>16. ¿Qué es el Midrash y cómo se utiliza en la interpretación bíblica?
+                <button onclick="copyToClipboard('¿Qué es el Midrash y cómo se utiliza en la interpretación bíblica?')">Copiar</button>
+            </li>
+            <li>17. ¿Cómo se aborda el concepto de la trinidad en el judaísmo mesiánico?
+                <button onclick="copyToClipboard('¿Cómo se aborda el concepto de la trinidad en el judaísmo mesiánico?')">Copiar</button>
+            </li>
+            <li>18. ¿Qué enseñanzas rabínicas sobre el Mesías se consideran relevantes para los mesiánicos?
+                <button onclick="copyToClipboard('¿Qué enseñanzas rabínicas sobre el Mesías se consideran relevantes para los mesiánicos?')">Copiar</button>
+            </li>
+            <li>19. ¿Cómo se explica el concepto de la resurrección en la fe mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se explica el concepto de la resurrección en la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>20. ¿Qué es el Zohar y cuál es su relación con el misticismo mesiánico?
+                <button onclick="copyToClipboard('¿Qué es el Zohar y cuál es su relación con el misticismo mesiánico?')">Copiar</button>
+            </li>
+            <li>21. ¿Cómo se aborda la ley alimentaria kashrut en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se aborda la ley alimentaria kashrut en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>22. ¿Qué significa ser "injertado" en Israel según Romanos 11?
+                <button onclick="copyToClipboard('¿Qué significa ser "injertado" en Israel según Romanos 11?')">Copiar</button>
+            </li>
+            <li>23. ¿Cómo interpreta el judaísmo mesiánico el retorno del pueblo judío a la Tierra Prometida?
+                <button onclick="copyToClipboard('¿Cómo interpreta el judaísmo mesiánico el retorno del pueblo judío a la Tierra Prometida?')">Copiar</button>
+            </li>
+            <li>24. ¿Cuál es el significado de la palabra "shalom" en la fe mesiánica?
+                <button onclick="copyToClipboard('¿Cuál es el significado de la palabra "shalom" en la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>25. ¿Cómo se entiende la expiación en el contexto de Yom Kipur y la muerte de Yeshúa?
+                <button onclick="copyToClipboard('¿Cómo se entiende la expiación en el contexto de Yom Kipur y la muerte de Yeshúa?')">Copiar</button>
+            </li>
+            <li>26. ¿Qué es el Targum y cómo ayuda en la comprensión de las Escrituras?
+                <button onclick="copyToClipboard('¿Qué es el Targum y cómo ayuda en la comprensión de las Escrituras?')">Copiar</button>
+            </li>
+            <li>27. ¿Cómo se aborda la cuestión de la salvación para los gentiles en la fe mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se aborda la cuestión de la salvación para los gentiles en la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>28. ¿Qué es la Shejiná y cómo se manifiesta en la vida del creyente?
+                <button onclick="copyToClipboard('¿Qué es la Shejiná y cómo se manifiesta en la vida del creyente?')">Copiar</button>
+            </li>
+            <li>29. ¿Qué papel juega el Mashiaj ben Yosef en las enseñanzas mesiánicas?
+                <button onclick="copyToClipboard('¿Qué papel juega el Mashiaj ben Yosef en las enseñanzas mesiánicas?')">Copiar</button>
+            </li>
+            <li>30. ¿Cómo se interpreta el libro de Apocalipsis desde una perspectiva judía?
+                <button onclick="copyToClipboard('¿Cómo se interpreta el libro de Apocalipsis desde una perspectiva judía?')">Copiar</button>
+            </li>
+            <li>31. ¿Qué es la Halajá y cómo se aplica en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Qué es la Halajá y cómo se aplica en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>32. ¿Cómo se relaciona el pacto abrahámico con la promesa del Mesías?
+                <button onclick="copyToClipboard('¿Cómo se relaciona el pacto abrahámico con la promesa del Mesías?')">Copiar</button>
+            </li>
+            <li>33. ¿Qué es la Guemará y cuál es su relevancia para el estudio mesiánico?
+                <button onclick="copyToClipboard('¿Qué es la Guemará y cuál es su relevancia para el estudio mesiánico?')">Copiar</button>
+            </li>
+            <li>34. ¿Cómo se abordan las genealogías de Yeshúa en los Evangelios?
+                <button onclick="copyToClipboard('¿Cómo se abordan las genealogías de Yeshúa en los Evangelios?')">Copiar</button>
+            </li>
+            <li>35. ¿Qué es el Peshitta y cómo se utiliza en el estudio de las Escrituras?
+                <button onclick="copyToClipboard('¿Qué es el Peshitta y cómo se utiliza en el estudio de las Escrituras?')">Copiar</button>
+            </li>
+            <li>36. ¿Cómo se interpreta el concepto de "Israel espiritual" en la fe mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se interpreta el concepto de "Israel espiritual" en la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>37. ¿Qué es la parashá y cómo se estudia en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Qué es la parashá y cómo se estudia en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>38. ¿Cómo se entiende el papel de la mujer en la sinagoga mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se entiende el papel de la mujer en la sinagoga mesiánica?')">Copiar</button>
+            </li>
+            <li>39. ¿Qué enseñanzas del Pirkei Avot son valiosas para los mesiánicos?
+                <button onclick="copyToClipboard('¿Qué enseñanzas del Pirkei Avot son valiosas para los mesiánicos?')">Copiar</button>
+            </li>
+            <li>40. ¿Cómo se interpreta el Salmo 22 en relación con Yeshúa?
+                <button onclick="copyToClipboard('¿Cómo se interpreta el Salmo 22 en relación con Yeshúa?')">Copiar</button>
+            </li>
+            <li>41. ¿Qué es el Yom Teruah y cuál es su significado profético?
+                <button onclick="copyToClipboard('¿Qué es el Yom Teruah y cuál es su significado profético?')">Copiar</button>
+            </li>
+            <li>42. ¿Cómo se aborda el tema del antisemitismo en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se aborda el tema del antisemitismo en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>43. ¿Cuál es la importancia de la mikvá en la vida del creyente?
+                <button onclick="copyToClipboard('¿Cuál es la importancia de la mikvá en la vida del creyente?')">Copiar</button>
+            </li>
+            <li>44. ¿Cómo se interpreta el libro de Hebreos desde una perspectiva judía?
+                <button onclick="copyToClipboard('¿Cómo se interpreta el libro de Hebreos desde una perspectiva judía?')">Copiar</button>
+            </li>
+            <li>45. ¿Qué es el Aleinu y cómo se utiliza en la oración mesiánica?
+                <button onclick="copyToClipboard('¿Qué es el Aleinu y cómo se utiliza en la oración mesiánica?')">Copiar</button>
+            </li>
+            <li>46. ¿Cómo se interpreta el canto de Moisés en Éxodo 15?
+                <button onclick="copyToClipboard('¿Cómo se interpreta el canto de Moisés en Éxodo 15?')">Copiar</button>
+            </li>
+            <li>47. ¿Qué enseñanzas del Baal Shem Tov pueden ser relevantes para los mesiánicos?
+                <button onclick="copyToClipboard('¿Qué enseñanzas del Baal Shem Tov pueden ser relevantes para los mesiánicos?')">Copiar</button>
+            </li>
+            <li>48. ¿Cómo se entiende el concepto de "remanente fiel" en la fe mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se entiende el concepto de "remanente fiel" en la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>49. ¿Qué es el Kaddish y cómo se integra en la liturgia mesiánica?
+                <button onclick="copyToClipboard('¿Qué es el Kaddish y cómo se integra en la liturgia mesiánica?')">Copiar</button>
+            </li>
+            <li>50. ¿Cómo se interpreta la visión de los huesos secos en Ezequiel 37?
+                <button onclick="copyToClipboard('¿Cómo se interpreta la visión de los huesos secos en Ezequiel 37?')">Copiar</button>
+            </li>
+            <li>51. ¿Cuál es el papel de la justicia social en la ética mesiánica?
+                <button onclick="copyToClipboard('¿Cuál es el papel de la justicia social en la ética mesiánica?')">Copiar</button>
+            </li>
+            <li>52. ¿Qué es el Gematria y cómo se utiliza en el estudio bíblico?
+                <button onclick="copyToClipboard('¿Qué es el Gematria y cómo se utiliza en el estudio bíblico?')">Copiar</button>
+            </li>
+            <li>53. ¿Cómo se aborda el tema de la idolatría en la fe mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se aborda el tema de la idolatría en la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>54. ¿Qué es la Nefesh y cómo se comprende en la espiritualidad mesiánica?
+                <button onclick="copyToClipboard('¿Qué es la Nefesh y cómo se comprende en la espiritualidad mesiánica?')">Copiar</button>
+            </li>
+            <li>55. ¿Cómo se interpreta la parábola del sembrador en el contexto judío?
+                <button onclick="copyToClipboard('¿Cómo se interpreta la parábola del sembrador en el contexto judío?')">Copiar</button>
+            </li>
+            <li>56. ¿Qué es el Siddur y cómo se utiliza en las oraciones mesiánicas?
+                <button onclick="copyToClipboard('¿Qué es el Siddur y cómo se utiliza en las oraciones mesiánicas?')">Copiar</button>
+            </li>
+            <li>57. ¿Cómo se aborda el tema de la guerra espiritual en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se aborda el tema de la guerra espiritual en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>58. ¿Qué significa ser un discípulo de Yeshúa en el contexto de la Toráh?
+                <button onclick="copyToClipboard('¿Qué significa ser un discípulo de Yeshúa en el contexto de la Toráh?')">Copiar</button>
+            </li>
+            <li>59. ¿Cómo se interpreta el mandato de amar al prójimo en la fe mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se interpreta el mandato de amar al prójimo en la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>60. ¿Qué es la Shemitá y cómo se aplica hoy en día?
+                <button onclick="copyToClipboard('¿Qué es la Shemitá y cómo se aplica hoy en día?')">Copiar</button>
+            </li>
+            <li>61. ¿Cómo se aborda la cuestión del divorcio en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se aborda la cuestión del divorcio en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>62. ¿Qué es el Eretz Israel y cuál es su significado en la escatología mesiánica?
+                <button onclick="copyToClipboard('¿Qué es el Eretz Israel y cuál es su significado en la escatología mesiánica?')">Copiar</button>
+            </li>
+            <li>63. ¿Cómo se interpreta el concepto de la Nueva Jerusalén en Apocalipsis?
+                <button onclick="copyToClipboard('¿Cómo se interpreta el concepto de la Nueva Jerusalén en Apocalipsis?')">Copiar</button>
+            </li>
+            <li>64. ¿Qué es la Neshamá y cómo se entiende en la fe mesiánica?
+                <button onclick="copyToClipboard('¿Qué es la Neshamá y cómo se entiende en la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>65. ¿Cómo se aborda el tema del liderazgo espiritual en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se aborda el tema del liderazgo espiritual en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>66. ¿Qué es la Sefiráh y cómo se relaciona con el crecimiento espiritual?
+                <button onclick="copyToClipboard('¿Qué es la Sefiráh y cómo se relaciona con el crecimiento espiritual?')">Copiar</button>
+            </li>
+            <li>67. ¿Cómo se interpreta el concepto de "nueva creación" en 2 Corintios 5:17?
+                <button onclick="copyToClipboard('¿Cómo se interpreta el concepto de "nueva creación" en 2 Corintios 5:17?')">Copiar</button>
+            </li>
+            <li>68. ¿Qué es el Shofar y cuál es su significado en las Escrituras?
+                <button onclick="copyToClipboard('¿Qué es el Shofar y cuál es su significado en las Escrituras?')">Copiar</button>
+            </li>
+            <li>69. ¿Cómo se entiende el concepto de "amor agape" en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se entiende el concepto de "amor agape" en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>70. ¿Qué es la Oración del Shemá y cómo se recita en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Qué es la Oración del Shemá y cómo se recita en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>71. ¿Cómo se aborda la cuestión de la justicia y la misericordia en la fe mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se aborda la cuestión de la justicia y la misericordia en la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>72. ¿Qué es el Mitzvot y cómo se aplica en la vida cotidiana del creyente?
+                <button onclick="copyToClipboard('¿Qué es el Mitzvot y cómo se aplica en la vida cotidiana del creyente?')">Copiar</button>
+            </li>
+            <li>73. ¿Cómo se interpreta el libro de Rut desde una perspectiva mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se interpreta el libro de Rut desde una perspectiva mesiánica?')">Copiar</button>
+            </li>
+            <li>74. ¿Qué es la Kiddush y cómo se celebra en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Qué es la Kiddush y cómo se celebra en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>75. ¿Cómo se entiende el concepto de "temor de Elohím" en la fe mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se entiende el concepto de "temor de Elohím" en la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>76. ¿Qué es el Sukkot y cuál es su significado profético?
+                <button onclick="copyToClipboard('¿Qué es el Sukkot y cuál es su significado profético?')">Copiar</button>
+            </li>
+            <li>77. ¿Cómo se aborda el tema de la pureza ritual en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se aborda el tema de la pureza ritual en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>78. ¿Qué es la Havdalá y cómo se celebra en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Qué es la Havdalá y cómo se celebra en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>79. ¿Cómo se interpreta el libro de Ester desde una perspectiva mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se interpreta el libro de Ester desde una perspectiva mesiánica?')">Copiar</button>
+            </li>
+            <li>80. ¿Qué es la Simjá y cómo se expresa en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Qué es la Simjá y cómo se expresa en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>81. ¿Cuál es la importancia de la Toráh en la vida de un creyente mesiánico?
+                <button onclick="copyToClipboard('¿Cuál es la importancia de la Toráh en la vida de un creyente mesiánico?')">Copiar</button>
+            </li>
+            <li>82. ¿Qué es el Tehilim y cómo se utiliza en la oración mesiánica?
+                <button onclick="copyToClipboard('¿Qué es el Tehilim y cómo se utiliza en la oración mesiánica?')">Copiar</button>
+            </li>
+            <li>83. ¿Cómo se aborda el tema de la identidad judía en la fe mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se aborda el tema de la identidad judía en la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>84. ¿Qué es la Hagadá y cómo se utiliza en el Seder de Pésaj?
+                <button onclick="copyToClipboard('¿Qué es la Hagadá y cómo se utiliza en el Seder de Pésaj?')">Copiar</button>
+            </li>
+            <li>85. ¿Cómo se interpreta el libro de Lamentaciones desde una perspectiva mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se interpreta el libro de Lamentaciones desde una perspectiva mesiánica?')">Copiar</button>
+            </li>
+            <li>86. ¿Qué es la Shalom Bayit y cómo se promueve en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Qué es la Shalom Bayit y cómo se promueve en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>87. ¿Cómo se entiende el concepto de "paz interior" en la fe mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se entiende el concepto de "paz interior" en la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>88. ¿Qué significa ser parte del pueblo de Israel y cómo se relaciona esto con la fe en Yeshúa?
+                <button onclick="copyToClipboard('¿Qué significa ser parte del pueblo de Israel y cómo se relaciona esto con la fe en Yeshúa?')">Copiar</button>
+            </li>
+            <li>89. ¿Cómo se aborda el tema del arrepentimiento en la fe mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se aborda el tema del arrepentimiento en la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>90. ¿Qué es el Elul y cuál es su significado en el calendario mesiánico?
+                <button onclick="copyToClipboard('¿Qué es el Elul y cuál es su significado en el calendario mesiánico?')">Copiar</button>
+            </li>
+            <li>91. ¿Cómo se interpreta el libro de Eclesiastés desde una perspectiva mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se interpreta el libro de Eclesiastés desde una perspectiva mesiánica?')">Copiar</button>
+            </li>
+            <li>92. ¿Qué es el Tzitzit y cómo se lleva en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Qué es el Tzitzit y cómo se lleva en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>93. ¿Cuáles son las festividades bíblicas y qué significan para los creyentes en Yeshúa?
+                <button onclick="copyToClipboard('¿Cuáles son las festividades bíblicas y qué significan para los creyentes en Yeshúa?')">Copiar</button>
+            </li>
+            <li>94. ¿Qué es la Oración del Amidá y cómo se recita en la comunidad mesiánica?
+                <button onclick="copyToClipboard('¿Qué es la Oración del Amidá y cómo se recita en la comunidad mesiánica?')">Copiar</button>
+            </li>
+            <li>95. ¿Cómo se aborda el tema de la libertad en el contexto de la Toráh?
+                <button onclick="copyToClipboard('¿Cómo se aborda el tema de la libertad en el contexto de la Toráh?')">Copiar</button>
+            </li>
+            <li>96. ¿Qué es la Kabbalah y cómo se relaciona con el misticismo?
+                <button onclick="copyToClipboard('¿Qué es la Kabbalah y cómo se relaciona con el misticismo?')">Copiar</button>
+            </li>
+            <li>97. ¿Cómo se interpreta el libro de Cantar de los Cantares desde una perspectiva mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se interpreta el libro de Cantar de los Cantares desde una perspectiva mesiánica?')">Copiar</button>
+            </li>
+            <li>98. ¿Qué es la Halel y cómo se utiliza en la adoración mesiánica?
+                <button onclick="copyToClipboard('¿Qué es la Halel y cómo se utiliza en la adoración mesiánica?')">Copiar</button>
+            </li>
+            <li>99. ¿Cómo se entiende el concepto de "luz del mundo" en la fe mesiánica?
+                <button onclick="copyToClipboard('¿Cómo se entiende el concepto de "luz del mundo" en la fe mesiánica?')">Copiar</button>
+            </li>
+            <li>100. ¿Qué es el Tikkun Olam y cómo se aplica en la vida del creyente mesiánico?
+                <button onclick="copyToClipboard('¿Qué es el Tikkun Olam y cómo se aplica en la vida del creyente mesiánico?')">Copiar</button>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+
+        // Base de conocimientos simplificada
+        const knowledgeBase = {
+            "génesis": "El primer libro de la Biblia y la Torah, que narra la creación del mundo y las primeras historias del pueblo hebreo.",
+            "éxodo": "El segundo libro, que relata la salida de los israelitas de Egipto bajo el liderazgo de Moisés.",
+            "moisés": "Un profeta fundamental en el judaísmo, que según la tradición recibió la Torah de Dios en el Monte Sinaí.",
+            "abraham": "Considerado el padre del pueblo judío, su historia se narra en el libro del Génesis.",
+            "los diez mandamientos": "Un conjunto de principios éticos y de adoración fundamentales en el judaísmo y el cristianismo."
+        };
+
+        function addMessage(message, isUser) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', isUser ? 'user-message' : 'ai-message');
+            messageElement.innerHTML = message;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function getAIResponse(message) {
+            message = message.toLowerCase();
+            for (const key in knowledgeBase) {
+                if (message.includes(key)) {
+                    return knowledgeBase[key];
+                }
+            }
+            return "Shalom, Bienvenidos al Ministerio Judío Mesiánico en Español: Soy tu guía de estudios de Tanakh: Toráh, Nevim, Ketuvim y Brit Hadasháh bajo la luz Yeshúa HaMashíaj de Biblia Toráh Viviente. <br>¡Explora, estudia y aprende con nosotros! <br>🕎 Apoyo y <a href=\"https://paypal.me/bibliatorahviviente\" target=\"_blank\">Ofrendas</a></br> ֎ Dirijete al Chat de <a href=\"https://chatgpt.com/g/g-jCg0euLKi-biblia-torah-viviente\" target=\"_blank\">Biblia Toráh Viviente de Estudio</br></div>";
+        }
+
+        function handleSendMessage() {
+            const message = userInput.value.trim();
+            if (message) {
+                addMessage(message, true);
+                userInput.value = '';
+
+                setTimeout(() => {
+                    const aiResponse = getAIResponse(message);
+                    addMessage(aiResponse, false);
+                }, 1000);
+            }
+        }
+
+        sendButton.addEventListener('click', handleSendMessage);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSendMessage();
+            }
+        });
+
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('Pregunta copiada: ' + text);
+        }
+    </script>
+</body>
+</html>
