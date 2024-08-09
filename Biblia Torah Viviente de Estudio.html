@@ -15,9 +15,16 @@
         }
         .navbar {
             display: flex;
-            justify-content: center;
+            align-items: center;
             background-color: #333;
-            padding: 10px 0;
+            padding: 10px;
+        }
+        .navbar img {
+            width: 50px; /* Tamaño inicial de la imagen */
+            margin-right: 20px; /* Espacio entre la imagen y los enlaces */
+        }
+        .navbar input[type="range"] {
+            margin-right: 20px; /* Espacio entre el control deslizante y los enlaces */
         }
         .navbar a {
             color: white;
@@ -129,6 +136,8 @@
 </head>
 <body>
     <div class="navbar">
+        <img src="https://github.com/BibliaTorahViviente/Estudio/blob/ad99387a71f3927645cb2fa8ac6d50c5efece858/TITULOTORA540.png?raw=true" alt="Logo" class="logo" id="logo">
+        <input type="range" min="30" max="200" value="100" id="logo-size-slider" onchange="changeLogoSize(this.value)">
         <a href="https://t.me/menutoraviviente" target="_blank">Menu</a>
         <a href="https://t.me/bibliatoraviviente" target="_blank">En Vivo</a>
         <a href="https://bibliatorahviviente.github.io/salmos/" target="_blank">Salmos</a>
@@ -146,7 +155,8 @@
     </div>
 
     <div class="container">
-        <h1>COPIE Y PEGUE LAS PREGUNTAS EN EL CHAT DE BIBLIA TORAH VIVIENTE DE ESTUDIO</h1>
+         <h2>Haga sus propias preguntas</h2>
+        <h2>O COPIE Y PEGUE LAS PREGUNTAS EN EL CHAT DE BIBLIA TORAH VIVIENTE DE ESTUDIO</h2>
         <ul>
             <li>1. ¿Quién es Yeshúa HaMashíaj y cuál es su papel en la historia de la redención?
                 <button onclick="copyToClipboard('¿Quién es Yeshúa HaMashíaj y cuál es su papel en la historia de la redención?')">Copiar</button>
@@ -455,6 +465,7 @@
         const chatMessages = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
         const sendButton = document.getElementById('send-button');
+        const logo = document.getElementById('logo');
 
         // Base de conocimientos simplificada
         const knowledgeBase = {
@@ -511,6 +522,10 @@
             document.execCommand('copy');
             document.body.removeChild(textarea);
             alert('Pregunta copiada: ' + text);
+        }
+
+        function changeLogoSize(size) {
+            logo.style.width = size + 'px';
         }
     </script>
 </body>
